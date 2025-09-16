@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(customizer->customizer.disable())
-                .authorizeHttpRequests(authorize->authorize.requestMatchers("/home/auth/login","/home/auth/register","/home/hello").permitAll()
+                .authorizeHttpRequests(authorize->authorize.requestMatchers("/home/auth/login","/home/auth/register","/home/hello","/colors/getDemoColors", "/tank/saveData").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

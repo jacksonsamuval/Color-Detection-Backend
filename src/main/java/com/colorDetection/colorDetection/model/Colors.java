@@ -1,9 +1,6 @@
 package com.colorDetection.colorDetection.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +9,10 @@ public class Colors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer containerNo;
+
+    @ManyToOne
+    @JoinColumn(name = "tank_id", nullable = false)
+    private Tanks tank;
     private int r;
     private int g;
     private int b;
@@ -20,20 +20,12 @@ public class Colors {
     private String colorName;
     private LocalDateTime timeStamp;
 
-    public Integer getContainerNo() {
-        return containerNo;
-    }
-
     public String getColorName() {
         return colorName;
     }
 
     public void setColorName(String colorName) {
         this.colorName = colorName;
-    }
-
-    public void setContainerNo(Integer containerNo) {
-        this.containerNo = containerNo;
     }
 
     public Integer getId() {
@@ -82,5 +74,13 @@ public class Colors {
 
     public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public Tanks getTank() {
+        return tank;
+    }
+
+    public void setTank(Tanks tank) {
+        this.tank = tank;
     }
 }

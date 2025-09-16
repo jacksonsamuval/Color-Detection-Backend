@@ -27,7 +27,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getServletPath();
-        return path.startsWith("/home/auth/login") || path.startsWith("/home/auth/register") || path.startsWith("/home/hello");
+        return path.startsWith("/home/auth/login") || path.startsWith("/home/auth/register") || path.startsWith("/home/hello") || path.startsWith("/colors/getDemoColors") || path.startsWith("/tank/saveData");
     }
 
 
