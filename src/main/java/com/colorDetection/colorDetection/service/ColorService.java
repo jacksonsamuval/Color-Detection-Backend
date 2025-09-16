@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,5 +52,22 @@ public class ColorService {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error saving color data");
         }
+    }
+
+    public ResponseEntity<?> getAllTankColors() {
+        List<Colors> colors = colorsRepo.findAll();
+        return ResponseEntity.status(200).body(colors);
+    }
+
+    public ResponseEntity<?> getColorsByTankName(String tankName) {
+        Optional<Tanks> tanks = tankRepo.findByTankNameIgnoreCaseTrim(tankName);
+        if (tanks.isEmpty()){
+            return ResponseEntity.status(401).body("Invalid Tank Name");
+        }
+        List<Colors> colors = colorsRepo.findByTank(tanks);
+        if (colors.isEmpty()){
+            return ResponseEntity.status(402).body("No Data Collected");
+        }
+        return ResponseEntity.status(200).body(colors);
     }
 }
